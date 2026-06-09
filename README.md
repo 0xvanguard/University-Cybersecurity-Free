@@ -283,7 +283,7 @@ Toda contribución aprobada se convierte en una entrada de portafolio de código
 
 **John Sebastian Camargo** · [@0xvanguard](https://github.com/0xvanguard) · Bogotá, Colombia 🇨🇴
 
-Estudiante de Ciberseguridad en Politécnico Grancolombiano · Técnico en Sistemas · entrenándome activamente hacia **Purple Team Engineer (Ofensiva + Defensiva) y DevSecOps**.
+Estudiante de Seguridad de la Informacion en Politécnico Grancolombiano · Técnico en Sistemas · entrenándome activamente hacia **Purple Team Engineer (Ofensiva + Defensiva) y DevSecOps**.
 
 Stack actual: Python · Docker · Wazuh · Nmap · MITRE ATT&CK · Anthropic API · Kotlin (Android).
 
