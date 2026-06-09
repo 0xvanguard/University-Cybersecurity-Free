@@ -167,75 +167,6 @@ Universidad Abierta de Ciberseguridad/
 
 ---
 
-## 🔴 Facultad 1 — Ciberseguridad Ofensiva
-
-> *"Conoce a tu enemigo y conócete a ti mismo." — Sun Tzu*
-
-Simulación de adversarios, auditoría de sistemas y explotación ética.
-
-<details>
-<summary>📖 <b>Ver módulos y herramientas</b></summary>
-
-| # | Dominio | Nivel | Herramientas | Proyecto de Portafolio |
-|---|---|---|---|---|
-| 01 | [Reconocimiento OSINT](./01-CIBERSEGURIDAD/01-reconocimiento-osint/) | Principiante | theHarvester · SpiderFoot · Photon | Panel OSINT personalizado |
-| 02 | [Pentesting / Red Team](./01-CIBERSEGURIDAD/02-pentesting-red-team/) | Intermedio | Metasploit · Impacket · BloodHound | Informe de pentest anónimo |
-| 03 | [Vulnerabilidades](./01-CIBERSEGURIDAD/03-analisis-vulnerabilidades/) | Principiante | Nmap · Nuclei · Nikto · OpenVAS | Script de escaneo personalizado |
-| 04 | [Explotación Web](./01-CIBERSEGURIDAD/04-explotacion-web/) | Intermedio | Burp Suite · SQLMap · FFUF · ZAP | Writeup de laboratorio OWASP |
-| 05 | [Post-Explotación](./01-CIBERSEGURIDAD/05-post-explotacion/) | Avanzado | LinPEAS · Mimikatz · Sliver | Writeup HTB/THM |
-| 06 | [Forense Digital](./01-CIBERSEGURIDAD/06-forense-digital/) | Intermedio | Autopsy · Volatility · ExifTool | Informe de forense de disco |
-| 07 | [Ingeniería Social](./01-CIBERSEGURIDAD/07-ingenieria-social/) | Principiante | GoPhish · SET · Evilginx | Campaña de phishing simulada |
-| 08 | [Criptografía](./01-CIBERSEGURIDAD/08-criptografia/) | Principiante | OpenSSL · Hashcat · John | Script de análisis de hashes |
-
-</details>
-
----
-
-## 🔵 Facultad 2 — Seguridad Defensiva y Gobernanza
-
-> *"Detección sin respuesta es solo telemetría cara."*
-
-Defensa de infraestructura, monitoreo, respuesta a incidentes y cumplimiento normativo.
-
-<details>
-<summary>📖 <b>Ver módulos y marcos de referencia</b></summary>
-
-| # | Dominio | Nivel | Enfoque | Proyecto de Portafolio |
-|---|---|---|---|---|
-| 01 | [Gestión de Riesgos](./02-SEGURIDAD-INFORMACION/01-gestion-riesgos/) | Principiante | ISO 27001 · NIST RMF | Análisis de riesgo ficticio |
-| 02 | [Blue Team / Defensa](./02-SEGURIDAD-INFORMACION/02-blue-team-defensa/) | Intermedio | Wazuh · Suricata · YARA | Reglas SIGMA/YARA personalizadas |
-| 03 | [Operaciones SOC](./02-SEGURIDAD-INFORMACION/03-soc-operations/) | Intermedio | Playbooks · IR · triaje | Playbook de respuesta a incidentes |
-| 04 | [DevSecOps](./02-SEGURIDAD-INFORMACION/04-devsecops/) | Avanzado | GitLeaks · SAST · Docker | Pipeline CI/CD con escaneo de secretos |
-| 05 | [Hardening](./02-SEGURIDAD-INFORMACION/05-hardening/) | Principiante | CIS Benchmarks · Linux | Script de hardening publicado |
-| 06 | [Cumplimiento](./02-SEGURIDAD-INFORMACION/06-compliance-normativas/) | Intermedio | GDPR · ISO 27001 · Ley 1581 CO | Lista de verificación de cumplimiento en Markdown |
-| 07 | [Inteligencia de Amenazas](./02-SEGURIDAD-INFORMACION/07-threat-intelligence/) | Avanzado | MITRE ATT&CK · IOCs | Feed de inteligencia personalizado |
-
-</details>
-
----
-
-## 🤖 Facultad 3 — IA Aplicada a Seguridad
-
-> *"El próximo pentester no escribe payloads — orquesta agentes que lo hacen."*
-
-Automatización con IA, seguridad de LLM y pipelines de reconocimiento inteligentes.
-
-<details>
-<summary>📖 <b>Ver módulos y tecnologías</b></summary>
-
-| # | Dominio | Nivel | Tecnologías | Proyecto de Portafolio |
-|---|---|---|---|---|
-| 01 | [Agentes OSINT](./03-IA-AGENTES-HERRAMIENTAS/01-agentes-osint/) | Intermedio | Python · APIs · web scraping | Pipeline OSINT automatizado |
-| 02 | [Agentes Pentest](./03-IA-AGENTES-HERRAMIENTAS/02-agentes-pentest/) | Avanzado | LangChain · Anthropic API | Agente de reconocimiento automático |
-| 03 | [Seguridad LLM](./03-IA-AGENTES-HERRAMIENTAS/03-llm-security/) | Intermedio | OWASP LLM Top 10 | Informe de auditoría de modelos IA |
-| 04 | [MLSecOps y Seguridad LLM](./03-IA-AGENTES-HERRAMIENTAS/03-mlsecops-llm-security/) | Entry → Avanzado | Pipelines IA · Evaluación seguridad | Post, repo de pruebas y guía de pipeline |
-| 05 | [Herramientas Trending](./03-IA-AGENTES-HERRAMIENTAS/04-herramientas-trending/) | Principiante | agents-cli · Ollama | Comparación de herramientas |
-| 06 | [Automatización Python](./03-IA-AGENTES-HERRAMIENTAS/05-automatizacion-python/) | Principiante | Scripts · Telegram · Discord | Bot de alertas de seguridad |
-
-</details>
-
----
-
 ## 🧪 Centro de Laboratorios
 
 Práctica 100% reproducible con Docker. Cada laboratorio tiene objetivos, prerrequisitos y evidencia de resolución.
@@ -344,7 +275,7 @@ Toda contribución aprobada se convierte en una entrada de portafolio de código
 - Todas las técnicas se documentan asumiendo **autorización escrita explícita** sobre el objetivo.
 - Las herramientas ofensivas se usan solo en laboratorios aislados o plataformas autorizadas (HTB, THM, VMs propias).
 - No soy responsable por el mal uso del contenido publicado aquí. **Hackea el planeta, no a tu vecino.**
-- Cumplimiento con: **Ley 1273/2009** (Colombia) · **GDPR** · **CFAA** (EE.UU.) · **CMA** (Reino Unido).
+- Cumplimiento con: **Ley 1273/2009 (CO)** · **GDPR** · **CFAA** (EE.UU.) · **CMA** (Reino Unido).
 
 ---
 
@@ -352,7 +283,7 @@ Toda contribución aprobada se convierte en una entrada de portafolio de código
 
 **John Sebastian Camargo** · [@0xvanguard](https://github.com/0xvanguard) · Bogotá, Colombia 🇨🇴
 
-Estudiante de Ciberseguridad en Politécnico Grancolombiano · Técnico en Sistemas · entrenándome activamente hacia **Analista SOC → Operador Red Team → Ingeniero DevSecOps**.
+Estudiante de Ciberseguridad en Politécnico Grancolombiano · Técnico en Sistemas · entrenándome activamente hacia **Purple Team Engineer (Ofensiva + Defensiva) y DevSecOps**.
 
 Stack actual: Python · Docker · Wazuh · Nmap · MITRE ATT&CK · Anthropic API · Kotlin (Android).
 
