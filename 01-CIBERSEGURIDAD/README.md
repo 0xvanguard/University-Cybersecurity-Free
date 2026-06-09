@@ -1,20 +1,50 @@
-<div align="center">
+# 🔴 Facultad 1 — Ciberseguridad Ofensiva y Base Purple
 
-# 🔴 01 — CIBERSEGURIDAD
+> **Misión de la facultad:** Formarte en los fundamentos técnicos de la ciberseguridad ofensiva (hacking ético) y darte la base práctica que luego alimenta rutas Purple Team, Blue Team y DevSecOps.
 
-**Seguridad ofensiva · Red Team · OSINT · Pentesting**
-
-*"Think like an attacker to defend like a pro."*
-
-</div>
+Aquí se aprende **a pensar como atacante para defender mejor**. Es la columna vertebral técnica de la universidad.
 
 ---
 
-## 🎯 Propósito
+## 🎯 Objetivos formativos
 
-Esta sección agrupa todo el conocimiento, herramientas y laboratorios relacionados con **seguridad ofensiva**. Cada subdominio sigue la cadena de ataque (Cyber Kill Chain / MITRE ATT&CK) desde reconocimiento hasta post-explotación.
+Al completar los módulos clave de esta facultad deberías ser capaz de:
 
-> ⚖️ **Aviso:** Todas las técnicas aquí documentadas asumen **autorización explícita** sobre el objetivo. Solo se aplican en HTB, THM, CTFs, máquinas propias o con scope contractual firmado.
+- Entender y aplicar el **ciclo completo de un pentest**: reconocimiento, enumeración, explotación, post-explotación y reporte.
+- Usar herramientas ofensivas estándar (Nmap, Gobuster, Burp, etc.) con criterio, no solo como "listas de comandos".
+- Analizar vulnerabilidades y priorizarlas según impacto real.
+- Documentar tus hallazgos de forma profesional (informes claros, reproducibles y útiles para equipos técnicos y de negocio).
+- Conectar la visión ofensiva con la defensa (base para Purple Team).
+
+---
+
+## 🧱 Áreas clave de la Facultad 1
+
+Los módulos de esta facultad se organizan alrededor de estas áreas:
+
+- **Reconocimiento y OSINT técnico**
+  - Identificación de objetivos, rangos, dominios, tecnologías visibles.
+  - Uso de herramientas de escaneo y recolección de información.
+
+- **Análisis de vulnerabilidades**
+  - Interpretar resultados de escáneres.
+  - Entender CWE, CVE, CVSS a nivel práctico.
+
+- **Explotación Web y de Servicios**
+  - Ataques a aplicaciones web (inyecciones, auth, sesiones, etc.).
+  - Explotación de servicios típicos (FTP, SSH, SMB, etc.) en entornos de laboratorio.
+
+- **Post-explotación y movimiento lateral**
+  - Enumeración interna tras lograr acceso.
+  - Escalada de privilegios en sistemas Windows/Linux.
+
+- **Forense básico y registro de evidencias**
+  - Captura y preservación de evidencias en labs.
+  - Uso básico de herramientas forenses para entender qué pasó.
+
+- **Purple Team Base**
+  - Traducir técnicas ofensivas a detecciones y controles defensivos.
+  - Mapear ataques a marcos como MITRE ATT&CK.
 
 ---
 
@@ -33,229 +63,88 @@ Esta sección agrupa todo el conocimiento, herramientas y laboratorios relaciona
 
 ---
 
-## 📂 Estructura tipo de cada subdominio
+## 🗂 Estructura tipo de cada módulo
 
-```
+```text
 NN-nombre/
 ├── herramientas/      ← Una carpeta por herramienta + README con uso
 ├── tecnicas/          ← Procedimientos paso a paso
-├── laboratorios/      ← Labs reproducibles (Docker / Vagrant)
-└── README.md          ← Índice del subdominio
+├── laboratorios/      ← Labs reproducibles (Docker / Vagrant / HTB/THM)
+└── README.md          ← Índice del módulo
 ```
 
----
-
-## 🔍 01 — Reconocimiento OSINT
-
-> **Objetivo:** mapear la superficie de ataque sin tocar al objetivo.
-
-**Herramientas clave:**
-- `theHarvester` — emails, subdominios, hosts
-- `Subfinder` / `Amass` — enumeración de subdominios
-- `SpiderFoot` — automatización OSINT modular
-- `Photon` — crawler con foco en intel
-- `Osintgram` — Instagram OSINT
-- `Nexfil` — username enumeration cross-platform
-
-**Categorías de OSINT:**
-- HUMINT digital (perfiles, redes sociales)
-- DOMINT (dominios, DNS, certificados — `crt.sh`, `Censys`, `Shodan`)
-- IMINT (imágenes — EXIF, geolocalización)
-- TECHINT (stack técnico — `Wappalyzer`, `WhatWeb`, `BuiltWith`)
-
-📁 [`./01-reconocimiento-osint/`](./01-reconocimiento-osint/)
+Cada módulo usará `TEMPLATE-MODULO.md` como base: objetivos, teoría mínima, práctica guiada, evidencia y entregables de portafolio.
 
 ---
 
-## ⚔️ 02 — Pentesting / Red Team
+## 👤 Perfiles que se forman en esta facultad
 
-> **Objetivo:** simular adversarios con metodología.
+Esta facultad sirve de base para varios roles:
 
-**Metodologías documentadas:**
-- **PTES** — Penetration Testing Execution Standard
-- **OWASP Testing Guide v4.2**
-- **MITRE ATT&CK** — TTPs catalogados
-- **OSSTMM** — Open Source Security Testing Methodology
+- **Hacker ético / Pentester junior**
+  - Foco en reconocer, explotar y documentar vulnerabilidades en entornos controlados.
 
-**Stack ofensivo:**
-- `Metasploit Framework` — explotación + post-exploit
-- `Impacket` — toolkit Python para AD/SMB/Kerberos
-- `BloodHound` + `SharpHound` — análisis de relaciones AD
-- `CrackMapExec` / `NetExec` — pivoting AD
-- `Sliver` / `Mythic` — C2 frameworks modernos (educativo)
+- **Analista de seguridad / Blue Team junior**
+  - Usa la visión ofensiva para entender mejor qué detectar y cómo responder.
 
-📁 [`./02-pentesting-red-team/`](./02-pentesting-red-team/)
+- **Purple Teamer**
+  - Conecta ataques con detecciones y mejoras de controles.
 
----
+- **Futuro DevSecOps / ML-Security Engineer**
+  - Necesita entender qué vulnerabilidades existen en la práctica antes de automatizar o asegurar pipelines.
 
-## 🕳️ 03 — Análisis de Vulnerabilidades
-
-> **Objetivo:** identificar debilidades técnicas explotables.
-
-**Herramientas:**
-- `Nmap` + scripts NSE (`vulners`, `vulscan`)
-- `Nuclei` — 10K+ templates de YAML
-- `Nikto` — web server scanner
-- `OpenVAS` / `Greenbone` — vuln management
-- `Trivy` / `Grype` — SCA para imágenes Docker
-
-**Bases de datos consultadas:**
-- NVD (NIST) · CVE Mitre · ExploitDB · GTFOBins · LOLBAS · Vulners
-
-📁 [`./03-analisis-vulnerabilidades/`](./03-analisis-vulnerabilidades/)
+Más adelante se podrán definir roles específicos (por ejemplo, "Red Team Operator", "Purple Team Engineer") igual que se hizo con `prompt-engineer-security` en Facultad 3.
 
 ---
 
-## 🌐 04 — Explotación Web
+## 🔗 Relación con otras facultades
 
-> **Objetivo:** dominar OWASP Top 10 con prácticas reales.
+- **Facultad 2 – Seguridad de la Información y Defensa (`02-SEGURIDAD-INFORMACION/`)**
+  - Toma las técnicas ofensivas vistas aquí y las aterriza en monitoreo, respuesta a incidentes, gestión de riesgos y cumplimiento.
 
-**OWASP Top 10 (2021) cubierto en `./04-explotacion-web/owasp-top10/`:**
+- **Facultad 3 – IA, Agentes y Automatización (`03-IA-AGENTES-HERRAMIENTAS/`)**
+  - Usa lo aprendido aquí como base para crear agentes de OSINT/pentest y automatizaciones con IA.
 
-| ID | Categoría |
-|---|---|
-| A01 | Broken Access Control |
-| A02 | Cryptographic Failures |
-| A03 | Injection (SQLi, NoSQLi, OS Command, LDAP) |
-| A04 | Insecure Design |
-| A05 | Security Misconfiguration |
-| A06 | Vulnerable & Outdated Components |
-| A07 | Identification and Authentication Failures |
-| A08 | Software and Data Integrity Failures |
-| A09 | Security Logging and Monitoring Failures |
-| A10 | Server-Side Request Forgery (SSRF) |
-
-**Stack:** `Burp Suite Pro/Community` · `OWASP ZAP` · `SQLMap` · `FFUF` · `Gobuster` · `Hakrawler`
-
-📁 [`./04-explotacion-web/`](./04-explotacion-web/)
+- **Facultad 4 – Laboratorios (`04-LABORATORIOS/`)**
+  - Muchos labs de CTF, HTB, THM y labs propios estarán alineados con estos módulos.
 
 ---
 
-## 🚀 05 — Post-Explotación
+## 📌 Ruta sugerida dentro de la Facultad 1
 
-> **Objetivo:** mantener acceso, escalar y moverse lateralmente.
+Un camino recomendado para avanzar en esta facultad:
 
-| Subcarpeta | Foco |
-|---|---|
-| `privilege-escalation/` | LinPEAS · WinPEAS · GTFOBins · LOLBAS · sudo abuse · SUID |
-| `lateral-movement/` | Pass-the-Hash · Pass-the-Ticket · WMI · WinRM · SMB relay |
-| `persistence/` | Cron · systemd services · scheduled tasks · registry keys |
+1. **`01-reconocimiento-osint/`**
+   - Fundamentos de reconocimiento y OSINT técnico sin IA.
+   - Uso de Nmap, whois, DNS, escaneos básicos.
 
-📁 [`./05-post-explotacion/`](./05-post-explotacion/)
+2. **`02-pentesting-red-team/`**
+   - Ciclo completo de pentest sobre máquinas de laboratorio.
 
----
+3. **`03-analisis-vulnerabilidades/`**
+   - Interpretar resultados de escáneres, priorizar findings y entender CWE/CVE.
 
-## 🔬 06 — Forense Digital
+4. **`04-explotacion-web/` y `05-post-explotacion/`**
+   - Hacking web + movimiento lateral y escalada de privilegios.
 
-> **Objetivo:** análisis post-incidente y extracción de evidencia.
+5. **`06-forense-digital/` y `07-ingenieria-social/`**
+   - Entender el impacto de ataques y la capa humana.
 
-**Herramientas:**
-- `Autopsy` / `The Sleuth Kit` — disk forensics
-- `Volatility` / `Volatility3` — memory forensics
-- `ExifTool` — metadatos
-- `Wireshark` / `tshark` — network forensics
-- `KAPE` — triage rápido (Windows)
-- `plaso` / `log2timeline` — timeline forense
-
-📁 [`./06-forense-digital/`](./06-forense-digital/)
+6. **`08-criptografia/`**
+   - Base de cifrado, hashing, PKI y errores comunes en su implementación.
 
 ---
 
-## 🎭 07 — Ingeniería Social
+## 📂 Entregables típicos de esta facultad
 
-> **Objetivo:** comprender el vector humano (siempre con autorización + ética).
+En los módulos de esta facultad es común que generes:
 
-**Herramientas:**
-- `GoPhish` — phishing campaigns con dashboard
-- `Social-Engineer Toolkit (SET)` — múltiples vectores
-- `Evilginx2` — adversary-in-the-middle (educativo)
-- `King Phisher` — alternativa a GoPhish
+- Informes de recon y pentest en Markdown/PDF.
+- Writeups de máquinas CTF (paso a paso, reproducibles).
+- Scripts simples (bash/Python) para automatizar pequeños pasos.
+- Notas y cheatsheets de comandos y técnicas.
 
-**Categorías:**
-- Phishing (correo) · Vishing (voz) · Smishing (SMS)
-- Pretexting · Baiting · Tailgating
-
-📁 [`./07-ingenieria-social/`](./07-ingenieria-social/)
-
----
-
-## 🔐 08 — Criptografía
-
-> **Objetivo:** entender primitivas, romperlas en CTF y aplicarlas correctamente.
-
-**Conceptos:**
-- Simétrica (AES, ChaCha20) vs Asimétrica (RSA, ECC)
-- Funciones hash (SHA-2/3, BLAKE3) y collisions
-- HMAC · KDFs (PBKDF2, Argon2, scrypt)
-- TLS handshake · perfect forward secrecy
-- PKI · X.509 · OCSP
-
-**Herramientas:**
-- `OpenSSL` · `Hashcat` · `John the Ripper` · `CyberChef` · `RsaCtfTool`
-
-📁 [`./08-criptografia/`](./08-criptografia/)
-
----
-
-## 💼 Ramas laborales — Carrera profesional (26 paths)
-
-> Más allá de las áreas de conocimiento, aquí están las **rutas de carrera** mapeadas a CISSP + NIST NICE + emergentes 2024-2026. Cada una con descripción, stack, certificaciones, roadmap 12 meses, salarios Colombia (local + remoto) y conexiones cruzadas.
-
-### 🏛️ 7 ramas clásicas CISSP (dominios)
-
-| Rama | Tier salarial | Mid-USD/mes |
-|---|---|---|
-| [`seguridad-redes/`](./seguridad-redes/) | B | $1,700-3,200 |
-| [`seguridad-aplicaciones/`](./seguridad-aplicaciones/) | A | $2,000-4,000 |
-| [`seguridad-informacion-datos/`](./seguridad-informacion-datos/) | B/A | $1,800-3,500 |
-| [`seguridad-operacional/`](./seguridad-operacional/) | C/B | $1,300-2,800 |
-| [`seguridad-nube/`](./seguridad-nube/) | A | $2,000-4,000 |
-| [`seguridad-endpoint/`](./seguridad-endpoint/) | B | $1,700-3,200 |
-| [`seguridad-iot-ot/`](./seguridad-iot-ot/) | A | $2,200-4,200 |
-
-### 🎯 14 especialidades NIST NICE (roles)
-
-| Rama | Tier | Mid-USD/mes |
-|---|---|---|
-| [`analista-soc/`](./analista-soc/) | B | $1,400-2,500 |
-| [`pentester-red-team/`](./pentester-red-team/) | A | $2,000-4,000 |
-| [`threat-hunter/`](./threat-hunter/) | A | $2,200-4,500 |
-| [`forense-digital/`](./forense-digital/) | B | $1,800-3,500 |
-| [`grc-compliance/`](./grc-compliance/) | C/B | $1,300-2,800 |
-| [`arquitecto-seguridad/`](./arquitecto-seguridad/) | A/S | $5,000-9,000 (sr) |
-| [`security-engineer/`](./security-engineer/) | A | $2,200-4,300 |
-| [`incident-responder/`](./incident-responder/) | A/B | $2,000-4,000 |
-| [`vulnerability-manager/`](./vulnerability-manager/) | B | $1,700-3,200 |
-| [`cryptographer/`](./cryptographer/) | **S** | $2,500-5,000 |
-| [`security-analyst/`](./security-analyst/) | C/B | $1,200-2,500 |
-| [`penetration-tester-specialized/`](./penetration-tester-specialized/) | A/S | $2,500-5,000 |
-| [`malware-analyst/`](./malware-analyst/) | **S** | $2,500-5,000 |
-| [`security-consultant/`](./security-consultant/) | B/A | $2,000-4,000 |
-
-### 🚀 5 emergentes 2024-2026
-
-| Rama | Tier | Mid-USD/mes |
-|---|---|---|
-| [`ia-security/`](./ia-security/) | **S** | $2,500-5,000 |
-| [`seguridad-cadena-suministro/`](./seguridad-cadena-suministro/) | A | $2,200-4,300 |
-| [`seguridad-defensiva-blue-team/`](./seguridad-defensiva-blue-team/) | B/A | $2,000-4,000 |
-| [`threat-intelligence/`](./threat-intelligence/) | B/A | $2,000-4,000 |
-| [`bug-bounty-hunting/`](./bug-bounty-hunting/) | Variable | P50: $2-8K/año |
-
-> **Tier salarial:** **S** = premium escaso · **A** = alta demanda · **B** = demanda media-alta · **C** = entry/generalista
-> Salarios reflejan empresas con presencia LATAM. Ver cada README para tabla completa local + remoto + breakdown por nivel (Junior / Mid / Senior).
-
----
-
-## 🧭 Cómo usar esta sección
-
-1. Identifica la **fase de la kill chain** en la que necesitas trabajar.
-2. Entra al subdominio correspondiente.
-3. Revisa el README del subdominio → carpeta `tecnicas/` para teoría.
-4. Pasa a `herramientas/` para uso práctico.
-5. Replica en `laboratorios/` con un entorno controlado.
-
-> Si buscas **carrera profesional** en lugar de área de conocimiento, ve a la sección [Ramas laborales](#-ramas-laborales--carrera-profesional-26-paths) ↑
+Todos estos se conectarán luego con `PORTAFOLIO.md` para que construyas una historia coherente de tu progreso ofensivo.
 
 ---
 
