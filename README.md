@@ -70,6 +70,30 @@ La métrica de éxito a largo plazo no son las visitas al repositorio, sino cuá
 
 ---
 
+## 🤖 Especialización: MLSecOps y Seguridad de LLM
+
+Además de las rutas tradicionales de Red Team, Blue Team y DevSecOps, esta universidad ofrece una **especialización única en español** en MLSecOps y seguridad de modelos de lenguaje (LLM).
+
+Este módulo avanzado, dentro de la Ruta 5 "IA Aplicada a Seguridad", está dividido en tres niveles:
+
+- 🟢 **Entry – Fundamentos IA + Riesgos básicos:** entiende qué es un LLM, cuáles son sus riesgos y qué significa MLSecOps para un junior de ciberseguridad.
+- 🟡 **Intermedio – Evaluación y ataques a LLM:** diseña y ejecuta un conjunto de pruebas de seguridad (prompt injection, exfiltración, jailbreaking básico) y documenta resultados.
+- 🔴 **Avanzado – Pipelines y arquitectura MLSecOps:** mapea riesgos a datos, modelo, despliegue y operación, y propone un pipeline sencillo con controles de seguridad.
+
+Cada nivel incluye **laboratorios prácticos** y al menos un **entregable público** diseñado para tu portafolio:
+
+- Post educativo explicando MLSecOps en lenguaje claro.
+- Repositorio con casos de prueba de seguridad para LLM documentados.
+- Guía/diagrama de un pipeline seguro con IA y puntos de control definidos.
+
+👉 Puedes explorar el módulo completo aquí:
+
+[`03-IA-AGENTES-HERRAMIENTAS/03-mlsecops-llm-security/`](./03-IA-AGENTES-HERRAMIENTAS/03-mlsecops-llm-security/)
+
+Y ver cómo encaja en la Ruta 5 "IA Aplicada a Seguridad" en [`RUTAS.md`](./RUTAS.md).
+
+---
+
 ## 🗺️ Rutas de Aprendizaje
 
 Elige tu camino según tu perfil y objetivos. Cada ruta tiene su guía detallada en [`RUTAS.md`](./RUTAS.md).
@@ -121,6 +145,7 @@ Universidad Abierta de Ciberseguridad/
 │   ├── 01-agentes-osint/
 │   ├── 02-agentes-pentest/
 │   ├── 03-llm-security/
+│   ├── 03-mlsecops-llm-security/
 │   ├── 04-herramientas-trending/
 │   └── 05-automatizacion-python/
 │
@@ -203,8 +228,9 @@ Automatización con IA, seguridad de LLM y pipelines de reconocimiento inteligen
 | 01 | [Agentes OSINT](./03-IA-AGENTES-HERRAMIENTAS/01-agentes-osint/) | Intermedio | Python · APIs · web scraping | Pipeline OSINT automatizado |
 | 02 | [Agentes Pentest](./03-IA-AGENTES-HERRAMIENTAS/02-agentes-pentest/) | Avanzado | LangChain · Anthropic API | Agente de reconocimiento automático |
 | 03 | [Seguridad LLM](./03-IA-AGENTES-HERRAMIENTAS/03-llm-security/) | Intermedio | OWASP LLM Top 10 | Informe de auditoría de modelos IA |
-| 04 | [Herramientas Trending](./03-IA-AGENTES-HERRAMIENTAS/04-herramientas-trending/) | Principiante | agents-cli · Ollama | Comparación de herramientas |
-| 05 | [Automatización Python](./03-IA-AGENTES-HERRAMIENTAS/05-automatizacion-python/) | Principiante | Scripts · Telegram · Discord | Bot de alertas de seguridad |
+| 04 | [MLSecOps y Seguridad LLM](./03-IA-AGENTES-HERRAMIENTAS/03-mlsecops-llm-security/) | Entry → Avanzado | Pipelines IA · Evaluación seguridad | Post, repo de pruebas y guía de pipeline |
+| 05 | [Herramientas Trending](./03-IA-AGENTES-HERRAMIENTAS/04-herramientas-trending/) | Principiante | agents-cli · Ollama | Comparación de herramientas |
+| 06 | [Automatización Python](./03-IA-AGENTES-HERRAMIENTAS/05-automatizacion-python/) | Principiante | Scripts · Telegram · Discord | Bot de alertas de seguridad |
 
 </details>
 
@@ -223,7 +249,7 @@ Práctica 100% reproducible con Docker. Cada laboratorio tiene objetivos, prerre
 
 ```bash
 # Clonar e iniciar un laboratorio
-git clone https://github.com/0xvanguard/--Universidad-abierta-de-ciberseguridad-en-espa-ol.git
+git clone https://github.com/0xvanguard/University-Cybersecurity-Free.git
 cd 04-LABORATORIOS/docker-labs/<nombre-del-lab>/
 docker compose up -d
 ```
@@ -254,6 +280,7 @@ Cada módulo que completes genera un **entregable publicable**. Guía completa e
 - ⚙️ Pipeline DevSecOps con CI/CD y escaneo de secretos
 - 🤖 Agente OSINT o triaje automatizado
 - 📋 Playbook de respuesta a incidentes como código
+- 🧠 Post educativo sobre MLSecOps, repositorio de pruebas LLM y guía de pipeline seguro
 
 ---
 
