@@ -1,83 +1,139 @@
-# 🔍 Módulo 01 — Reconocimiento OSINT
+# 01 — Reconocimiento OSINT (Clásico, sin IA)
 
-> **Objetivo Principal:** Recopilar, correlacionar y analizar información pública sobre un objetivo usando herramientas OSINT profesionales, sin interactuar directamente con el sistema objetivo.
+> **Objetivo del módulo:** Dominar las técnicas clásicas de reconocimiento y OSINT técnico para mapear la superficie de ataque de un objetivo, sin usar IA, de forma sistemática, legal y reproducible.
 
-[![Nivel](https://img.shields.io/badge/Nivel-Básico-green?style=flat-square)]()
-[![Duración](https://img.shields.io/badge/Duración-2--3%20semanas-blue?style=flat-square)]()
-[![Lab Docker](https://img.shields.io/badge/Lab-Docker%20incluido-orange?style=flat-square)](./laboratorio/)
-[![Portafolio](https://img.shields.io/badge/Entregable-Dashboard%20OSINT-purple?style=flat-square)](./portafolio/)
+Este módulo es la **puerta de entrada práctica** a la Facultad 1. Aquí aprendes a descubrir **qué existe**, **dónde está** y **cómo se ve** un objetivo antes de pensar en explotar nada.
 
 ---
 
-## 📋 Resumen del módulo
+## 🎯 Objetivos de aprendizaje
 
-| Atributo | Detalle |
-|---|---|
-| 🏷️ **Nivel** | Básico (sin experiencia previa requerida) |
-| ⏱️ **Duración estimada** | 2–3 semanas (4–6h por semana) |
-| 🎯 **Resultado esperado** | Crear un informe OSINT profesional sobre un objetivo autorizado |
-| 🧪 **Práctica verificable** | Lab Docker con objetivo local + reto final contra dominio propio |
-| 🗂️ **Portafolio** | Reporte OSINT anonimizado publicable en GitHub/LinkedIn |
-| 🔗 **Sigue a** | — (primer módulo recomendado) |
-| 🔗 **Conduce a** | [Módulo 02 — Pentesting / Red Team](../02-pentesting-red-team/) |
+Al completar este módulo deberías ser capaz de:
+
+- Explicar la diferencia entre **OSINT general** y **reconocimiento técnico aplicado a pentesting**.
+- Identificar el **scope autorizado** (dominios, rangos IP, assets en nube, subdominios).
+- Usar herramientas clásicas (whois, dig, Nmap, etc.) para:
+  - Resolver dominios, registrar DNS y obtener información de registros.
+  - Descubrir hosts activos en un rango de red.
+  - Enumerar puertos y servicios expuestos.
+- Organizar tus hallazgos en un formato estructurado (tablas, notas, diagramas simples).
+- Generar un **informe de reconocimiento** claro y reutilizable para siguientes fases del pentest.
 
 ---
 
-## 🗺️ Contenido del módulo
+## 📚 Teoría mínima
 
-```
+Este módulo asume que te concentras en **OSINT técnico y recon activo básico** sobre objetivos autorizados.
+
+### OSINT vs Reconocimiento técnico
+
+- **OSINT (Open Source Intelligence):**
+  - Información obtenida de fuentes públicas: buscadores, redes sociales, registros públicos, leaks, etc.
+  - Puede incluir datos humanos (personas, roles), de negocio y técnicos.
+
+- **Reconocimiento técnico aplicado a pentesting:**
+  - Se centra en la **superficie técnica**: dominios, subdominios, IPs, puertos, servicios, tecnologías visibles.
+  - Incluye recon pasivo (sin tocar directamente al objetivo) y recon activo controlado (como Nmap) dentro del scope autorizado.
+
+### Fases típicas de recon
+
+1. **Definición de scope**
+   - Qué dominios, subdominios, rangos de IP y aplicaciones están autorizados.
+   - Qué está explícitamente fuera de alcance.
+
+2. **Reconocimiento pasivo**
+   - WHOIS, registros DNS, certificados (CRT), datos de OSINT general.
+   - Sin enviar tráfico directo al objetivo (o lo mínimo posible).
+
+3. **Descubrimiento de hosts**
+   - Identificar qué IPs están activas dentro del rango autorizado.
+
+4. **Enumeración de puertos y servicios**
+   - Identificar qué puertos están abiertos y qué servicios parecen correr allí.
+
+5. **Organización de hallazgos**
+   - Tablas por host, servicio, versión y posibles vectores de ataque a investigar.
+
+---
+
+## 🗂 Estructura del módulo
+
+```text
 01-reconocimiento-osint/
-├── README.md                    ← Estás aquí
 ├── teoria/
-│   └── 01-fundamentos-osint.md  ← Conceptos base, metodología, fases
+│   └── 01-fundamentos-osint.md   ← Conceptos base, metodología, fases
+│
 ├── herramientas/
-│   ├── theharvester.md          ← Emails, subdominios, IPs
-│   ├── spiderfoot.md            ← Reconocimiento automatizado
-│   └── google-dorks.md          ← Búsquedas avanzadas en Google
-├── laboratorio/
-│   ├── README-lab.md            ← Instrucciones del lab
-│   └── docker-compose.yml       ← Entorno reproducible
+│   ├── whois/                    ← Uso básico + ejemplos
+│   ├── dig-dns/                  ← Consultas DNS típicas
+│   ├── nmap/                     ← Escaneos host discovery + puertos
+│   └── otros/                    ← Otras herramientas de apoyo
+│
+├── tecnicas/
+│   ├── 01-definir-scope.md          ← Cómo delimitar scope de forma profesional
+│   ├── 02-recon-pasivo-dns-whois.md ← Procedimiento paso a paso
+│   ├── 03-host-discovery-nmap.md    ← Descubrimiento de hosts
+│   └── 04-enumeracion-puertos.md    ← Puertos/servicios básicos
+│
+├── laboratorios/
+│   ├── lab-01-mapeo-superficie-basico/
+│   │   ├── enunciado.md           ← Planteamiento del lab
+│   │   ├── guia-paso-a-paso.md    ← Opcional, solo si se necesita apoyo
+│   │   └── entregables.md         ← Qué debe producir el estudiante
+│   └── (futuros labs...)
+│
 └── portafolio/
-    └── TEMPLATE-reporte-osint.md ← Plantilla de reporte profesional
+    └── TEMPLATE-informe-recon.md  ← Plantilla de informe de reconocimiento
 ```
 
----
-
-## ⚡ Inicio rápido
-
-```bash
-# 1. Clonar el repo
-git clone https://github.com/0xvanguard/--Universidad-abierta-de-ciberseguridad-en-espa-ol.git
-cd --Universidad-abierta-de-ciberseguridad-en-espa-ol/01-CIBERSEGURIDAD/01-reconocimiento-osint/
-
-# 2. Leer la teoría primero (20 min)
-cat teoria/01-fundamentos-osint.md
-
-# 3. Levantar el lab
-cd laboratorio/
-docker compose up -d
-
-# 4. Ejecutar theHarvester contra el objetivo de práctica
-theharvester -d testphp.vulnweb.com -b google,bing,crtsh -l 200
-```
+> Todos los labs utilizarán una **empresa ficticia** y entornos controlados (rango de IPs de laboratorio, dominios simulados, etc.). Nunca se practicarán técnicas sobre objetivos reales sin autorización.
 
 ---
 
-## 🎯 ¿Qué sabrás hacer al terminar?
+## 📂 Tipos de entregables del módulo
 
-- [ ] Ejecutar un proceso OSINT completo en 5 fases (planificación → recolección → análisis → correlación → reporte)
-- [ ] Recopilar subdominios, emails y tecnologías de un dominio objetivo
-- [ ] Identificar infraestructura expuesta usando Shodan y Censys sin tocar el sistema
-- [ ] Crear Google Dorks para filtrar información sensible indexada
-- [ ] Generar un reporte OSINT en formato ejecutivo + técnico
-- [ ] Publicar tu primer entregable de portafolio
+En este módulo se esperan entregables clásicos de recon, por ejemplo:
+
+- **`informe-recon-inicial.md`**
+  - Resumen del objetivo, scope, metodología y hallazgos clave.
+
+- **Tablas de hosts y servicios**
+  - Host/IP, puertos abiertos, servicios detectados, notas.
+
+- **Notas técnicas de comandos**
+  - Colección de comandos usados (whois, dig, Nmap) con comentarios.
+
+- **Diagrama simple de superficie de ataque** (opcional)
+  - Puede ser un esquema en texto o una imagen sencilla mostrando hosts y servicios principales.
+
+Estos entregables se podrán luego enlazar desde `PORTAFOLIO.md` como evidencia de habilidades de reconocimiento.
 
 ---
 
-## ⚖️ Aviso ético
+## 🔗 Encaje del módulo en la facultad y la ruta
 
-> OSINT es legal cuando se aplica a **objetivos propios o con autorización escrita**. Nunca apliques estas técnicas contra personas, organizaciones o infraestructura sin permiso explícito. Cumplimiento con Ley 1273/2009 (Colombia) · GDPR · CFAA.
+Dentro de la Facultad 1, este módulo es el **primer paso** de la ruta ofensiva:
+
+1. `01-reconocimiento-osint/`  ← Este módulo (recon clásico)
+2. `02-pentesting-red-team/`   ← Ciclo completo de pentest sobre labs
+3. `03-analisis-vulnerabilidades/`
+4. `04-explotacion-web/` y `05-post-explotacion/`
+5. Otros módulos ofensivos (forense, ingeniería social, criptografía)
+
+También alimenta directamente:
+
+- Rutas de **Pentester / Red Team**.
+- Rutas de **Analista SOC / Blue Team**, que necesitan entender qué se expone.
+- Facultad 3, donde más adelante podrás automatizar parte de este recon con IA, pero sobre una base clásica sólida.
 
 ---
 
-**[⬆ Volver al inicio](../../README.md)** · **[📖 Leer teoría →](./teoria/01-fundamentos-osint.md)** · **[🧪 Ir al lab →](./laboratorio/README-lab.md)**
+## ✅ Próximos pasos dentro de este módulo
+
+Los siguientes pasos naturales serán:
+
+- Crear `teoria/01-fundamentos-osint.md` con la teoría resumida que soporte estas prácticas.
+- Definir el **Lab 01 — Mapeo de superficie básico** en `laboratorios/lab-01-mapeo-superficie-basico/`.
+- Crear `portafolio/TEMPLATE-informe-recon.md` para unificar cómo presentas tus hallazgos.
+
+Con eso, el módulo quedará listo para empezar a añadir ejercicios concretos y ejemplos de alta calidad para tu portafolio.
