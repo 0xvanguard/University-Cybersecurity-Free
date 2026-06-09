@@ -30,7 +30,33 @@ Al completar los primeros módulos de Purple Team, el alumno debería ser capaz 
 
 ---
 
-## 3. Primera pieza Purple Team con NovaPay Labs
+## 3. Pack Purple Web NovaPay v1 (ruta sugerida)
+
+Como primer conjunto de ejercicios integrados, esta facultad ofrece el **Pack Purple Web NovaPay v1**, una ruta sugerida que conecta los módulos ofensivos y defensivos ya construidos en torno al portal de merchants de NovaPay Labs.
+
+### 3.1 Lab 01 — Purple Web: Login storm controlado
+
+- **Ruta:** `04-purple-team-colaboracion/laboratorios/lab-01-purple-web-login-storm/`  
+- **Idea central:** Simular un pequeño "login storm" controlado (varios intentos de login fallidos) contra el portal de merchants y ver cómo se reflejan en los logs de autenticación/aplicación web o en la herramienta SOC. [cite:183]
+- **Conexión con Red y Blue:**  
+  - Red: se apoya en el conocimiento del login del portal adquirido en el módulo de Pentesting/Red Team. [cite:172]  
+  - Blue: reutiliza los conceptos de logs de autenticación y su visualización trabajados en los labs SOC de la facultad Blue Team. [cite:181]
+- **Enfoque Purple:** El alumno diseña y ejecuta el patrón ofensivo, lo busca en la telemetría y propone al menos una idea de alerta/umbral para un SOC, documentando todo en una ficha SOC y en versiones para gerente y analista.
+
+### 3.2 Lab 02 — Purple Web: Exploración de rutas "raras"
+
+- **Ruta:** `04-purple-team-colaboracion/laboratorios/lab-02-purple-web-rutas-raras/`  
+- **Idea central:** Realizar una exploración controlada de rutas poco comunes o no enlazadas (por ejemplo, `/admin`, `/backup`, `/test`) en el portal, y analizar cómo ese reconocimiento se ve en los logs de servidor/aplicación. [cite:184]
+- **Conexión con Red y Blue:**  
+  - Red: se basa en las técnicas de reconocimiento y enumeración de rutas vistas en los labs de Pentest web. [cite:172]  
+  - Blue: utiliza la lectura de logs de servidor y códigos HTTP introducida en los ejercicios Blue Team (lectura de eventos y visualización en herramientas SOC). [cite:181]
+- **Enfoque Purple:** El alumno identifica patrones de exploración (múltiples 404, accesos repetidos a `/admin`, etc.), evalúa su visibilidad y propone ideas de alerta o casos de hunting para detectar este tipo de actividad.
+
+> **Recomendación de uso:** esta ruta Purple Web es ideal para alumnos que ya hayan completado la parte básica de Recon/Pentest Web en Red Team y los primeros labs de lectura/visualización de logs en Blue Team. Permite ver, en un escenario web realista, cómo los ataques que se practican en Red generan señales que Blue puede usar, y cómo Purple puede cerrar el ciclo con mejoras concretas de detección.
+
+---
+
+## 4. Primera pieza Purple Team con NovaPay Labs
 
 Para arrancar, se usará el escenario ya conocido de **NovaPay Labs**:
 
@@ -44,89 +70,29 @@ La primera pieza Purple Team consistirá en un **laboratorio integrado** donde e
 - Evalúa si la visibilidad actual sería suficiente para detectar una fuerza bruta básica.  
 - Propone ajustes o ideas de detección.
 
----
-
-## 4. Concepto de laboratorio Purple Team — "Login storm" controlado en NovaPay
-
-> **Nombre tentativo:** Lab 01 — Ejercicio Purple Team básico: login fallidos contra el portal de merchants
-
-### 4.1 Narrativa
-
-La fintech NovaPay Labs quiere validar si su entorno está preparado para detectar un patrón simple pero común: **múltiples intentos de login fallidos** contra el portal de merchants.
-
-Como equipo Purple Team, tendrás dos gorros:
-
-- Con el gorro **Red**, simularás un pequeño "login storm" controlado contra el portal (sin llegar a DoS ni fuerza bruta agresiva).  
-- Con el gorro **Blue**, revisarás cómo se reflejan esos intentos en los logs y en la herramienta SOC, y juzgarás si la detección actual sería suficiente.
-
-### 4.2 Alcance
-
-Incluido:
-
-- Portal de merchants de NovaPay Labs en el entorno de laboratorio.  
-- Generación controlada de intentos de login fallidos (por ejemplo, usando un script suave o pruebas manuales repetidas).  
-- Revisión de logs de autenticación y aplicación web en la plataforma SOC (ELK/Wazuh) utilizada en el módulo Blue Team.  
-
-Fuera de alcance:
-
-- Ataques de fuerza bruta a gran escala.  
-- Explotación de vulnerabilidades más avanzadas.  
-- Cambios de configuración profundos en la plataforma SOC (más allá de ideas o pseudorreglas de detección).
-
-### 4.3 Objetivos específicos del lab
-
-Al terminar este laboratorio Purple Team, el alumno debería ser capaz de:
-
-1. Ejecutar un conjunto de intentos de login fallidos de forma controlada contra el portal.  
-2. Localizar esos eventos en los logs y en la herramienta SOC, confirmando que la telemetría los captura.  
-3. Identificar el patrón (por ejemplo, N intentos fallidos en una ventana de tiempo) y valorar si existiría una alerta o si sería fácil definir una.  
-4. Formular al menos **una propuesta de mejora de detección** (umbral, correlación, alerta) basada en lo observado.  
-
-### 4.4 Material necesario
-
-- Acceso al **portal de merchants** en el entorno de laboratorio.  
-- Cuenta(s) de prueba o credenciales falsas permitidas para el ejercicio (para no usar cuentas reales).  
-- Acceso a la **herramienta SOC** (ELK/Wazuh) donde se recojan logs de autenticación y aplicación web del portal.  
-- Guía básica con:  
-  - Cómo lanzar los intentos de login (manual o script proporcionado).  
-  - Qué índice/fuente de datos revisar en la herramienta SOC.  
-
-### 4.5 Tareas principales (a alto nivel)
-
-1. **Fase Red (simulación de ataque):**  
-   - Realizar un número definido de intentos de login fallidos hacia una cuenta de prueba (por ejemplo, 10–20 intentos en pocos minutos).  
-   - Registrar la IP origen y el intervalo de tiempo aproximado.  
-
-2. **Fase Blue (búsqueda y análisis):**  
-   - En la herramienta SOC, filtrar los logs de autenticación para el rango de tiempo e IP origen utilizados.  
-   - Confirmar que los intentos aparecen correctamente registrados (campos de usuario, resultado, IP, timestamp).  
-   - Identificar si ya existe algún tipo de alerta o regla visible para este patrón.  
-
-3. **Fase Purple (discusión y mejora):**  
-   - Documentar el patrón observado (por ejemplo, "15 LOGIN_FAILURE para el mismo usuario en 3 minutos desde la IP X").  
-   - Evaluar si un analista SOC podría detectarlo fácilmente en el día a día.  
-   - Proponer una idea de regla o umbral (aunque sea en pseudocódigo) para generar una alerta ante este patrón.  
-
-### 4.6 Entregables
-
-- Una **ficha de evento SOC** específica para este ejercicio, usando la plantilla oficial, donde se detalle:
-  - Clasificación del evento (autenticación, comportamiento sospechoso).  
-  - Descripción del patrón de login fallidos.  
-  - Análisis del impacto potencial.  
-  - Recomendaciones de detección y respuesta.  
-- Un mini resumen Purple Team (puede ser una sección adicional) donde el alumno explique:
-  - Qué hizo como "Red".  
-  - Qué observó como "Blue".  
-  - Qué mejora propone para cerrar el ciclo.
+*(Contenido ampliado en los enunciados específicos de cada lab del pack.)*
 
 ---
 
-## 5. Próximos pasos para la facultad Purple Team
+## 5. Comunicación Efectiva en Purple Team
 
-A partir de este primer concepto, se podrán ir añadiendo:
+El Purple Team conecta directamente ataque, detección y mejora continua, y eso requiere una comunicación clara hacia varios perfiles.
 
-- Un **README específico del primer módulo Purple Team** (por ejemplo, `01-ejercicios-colaborativos-basicos/`) con este lab como pieza central.  
-- Labs adicionales que usen otras técnicas ofensivas simples (por ejemplo, exploración de rutas, ejecución de scripts en endpoints) y sus reflejos en la telemetría.  
-- Una futura integración con módulos de IA/MLSecOps donde parte de la lógica de detección/mejora se automatice.
+En los ejercicios de esta facultad, el alumno practicará:
 
-Esta primera pieza ya deja claro el espíritu Purple: usar lo ofensivo para fortalecer lo defensivo en un mismo escenario, con métricas y aprendizaje en ambas direcciones.
+- **Explicaciones para gerencia:** resúmenes en 2–3 frases sobre qué ejercicio se hizo, qué se descubrió y cómo mejora la seguridad de la organización.  
+- **Explicaciones para equipos técnicos:** descripción de las técnicas ofensivas usadas, cómo se ven en la telemetría, qué regla o alerta se validó y qué ajustes se proponen.
+
+Así, cada ejercicio Purple no solo mejora la cobertura técnica de detecciones, sino también la capacidad del alumno de **contar la historia completa del ataque y la defensa** a audiencias distintas.
+
+---
+
+## 6. Próximos pasos para la facultad Purple Team
+
+A partir del Pack Purple Web NovaPay v1, se podrán ir añadiendo:
+
+- Un módulo Purple centrado en endpoint (procesos, comandos, PowerShell, creación de usuarios, etc.) con ejercicios similares a los de web pero sobre telemetría de host.  
+- Labs adicionales que usen otras técnicas ofensivas simples (por ejemplo, actividad en endpoints, movimiento lateral limitado) y sus reflejos en la telemetría.  
+- Una futura integración con módulos de IA/MLSecOps donde parte de la lógica de detección y mejora se automatice.
+
+Esta facultad se irá actualizando para reflejar nuevas rutas Purple a medida que se enriquezcan las facultades Red y Blue.
