@@ -1,187 +1,145 @@
-# 📖 Fundamentos de OSINT
+# Fundamentos de OSINT y Reconocimiento Técnico
 
-> *"El reconocimiento es el 70% de un pentest exitoso. La mayoría falla porque subestima esta fase."*
+> **Objetivo de este documento:** darte el marco mínimo de conceptos y fases para que entiendas **qué estás haciendo** cuando ejecutas reconocimiento OSINT técnico en un pentest.
 
----
-
-## ¿Qué es OSINT?
-
-**OSINT (Open Source Intelligence)** es la recopilación y análisis de información disponible públicamente para producir inteligencia accionable. No requiere acceso no autorizado, no deja huellas en el sistema objetivo, y es 100% legal cuando se usa con autorización.
-
-La diferencia entre un atacante novato y un profesional está en el reconocimiento: el novato lanza exploits a ciegas; el profesional primero entiende perfectamente el objetivo.
+Este texto no busca ser un libro; es una guía compacta que podrás revisar rápido antes de cada lab.
 
 ---
 
-## Las 5 fases del reconocimiento OSINT
+## 1. ¿Qué es OSINT?
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                                                         │
-│  1. PLANIFICACIÓN  →  Define alcance, objetivos, límites │
-│         ↓                                               │
-│  2. RECOLECCIÓN   →  Fuentes pasivas, sin tocar target  │
-│         ↓                                               │
-│  3. PROCESAMIENTO →  Normalizar, limpiar, clasificar    │
-│         ↓                                               │
-│  4. ANÁLISIS      →  Correlacionar, encontrar patrones  │
-│         ↓                                               │
-│  5. REPORTE       →  Documentar hallazgos + evidencias  │
-│                                                         │
-└─────────────────────────────────────────────────────────┘
-```
+**OSINT (Open Source Intelligence)** es la obtención y análisis de información a partir de **fuentes públicas o accesibles sin intrusión**.
+
+En ciberseguridad, las fuentes OSINT pueden incluir:
+
+- Motores de búsqueda (Google, Bing, DuckDuckGo).
+- Registros de dominios (WHOIS), DNS públicos, certificados (CRT).
+- Repositorios públicos (GitHub, GitLab).
+- Redes sociales y perfiles profesionales.
+- Documentos expuestos (PDF, DOCX, hojas de cálculo).
+
+OSINT no implica todavía explotar vulnerabilidades: se trata de **entender el contexto y la exposición** del objetivo.
 
 ---
 
-## Fuentes de información (la taxonomía OSINT)
+## 2. Reconocimiento técnico aplicado a pentesting
 
-### 🌐 Infraestructura y dominios
-| Fuente | Qué revela | Herramienta |
-|---|---|---|
-| DNS / WHOIS | Registrador, fechas, servidores NS | `whois`, `dig`, `nslookup` |
-| Certificados TLS | Subdominios no publicados | `crt.sh`, `certspotter` |
-| BGP / ASN | Rangos de IP propios de la org | `bgp.he.net`, `ipinfo.io` |
-| Shodan / Censys | Puertos abiertos, banners, versiones | `shodan`, `censys.io` |
-| Subdominios | Infraestructura oculta | `theHarvester`, `amass`, `subfinder` |
+Dentro de un pentest, el enfoque se vuelve más concreto: pasas de información general a **superficie técnica de ataque**.
 
-### 👤 Personas y correos
-| Fuente | Qué revela | Herramienta |
-|---|---|---|
-| LinkedIn | Empleados, tecnologías usadas, estructura org | Manual + `linkedin2username` |
-| GitHub | Emails en commits, tokens expuestos, código interno | `gitleaks`, búsqueda manual |
-| Hunter.io | Patrón de emails corporativos | `theHarvester`, `hunter.io` |
-| HaveIBeenPwned | Cuentas en brechas conocidas | API pública |
+Cuando hablamos de **reconocimiento técnico**, nos interesan principalmente:
 
-### 🖥️ Tecnología expuesta
-| Fuente | Qué revela | Herramienta |
-|---|---|---|
-| Wappalyzer / BuiltWith | Stack tecnológico del sitio web | Extensión de navegador |
-| Wayback Machine | Versiones antiguas con endpoints ocultos | `waybackurls`, `gau` |
-| Google Dorks | Archivos sensibles indexados por error | Manual |
-| Pastebin / GitHub | Credenciales, configs, keys filtradas | `pwnbin`, búsqueda manual |
+- Dominios y subdominios relacionados con la organización.
+- Direcciones IP y rangos de red asociados.
+- Puertos abiertos y servicios escuchando.
+- Tecnologías visibles (servidores web, frameworks, CMS, versiones).
+
+El reconocimiento técnico se puede dividir en dos grandes tipos:
+
+- **Reconocimiento pasivo:**
+  - Intentas aprender del objetivo sin enviarle tráfico directo (o lo mínimo posible).
+  - Ejemplos: consultar WHOIS, revisar DNS públicos, usar buscadores, revisar certificados en CRT.
+
+- **Reconocimiento activo controlado:**
+  - Envías tráfico directamente al objetivo dentro del **scope autorizado**.
+  - Ejemplos: escanear un rango de IP con Nmap, enumerar puertos/servicios de un host.
+
+En este módulo combinaremos ambos enfoques, siempre dentro de los límites éticos y legales definidos.
 
 ---
 
-## Google Dorks — Búsquedas de poder
+## 3. Importancia del scope
 
-Google Dorks son operadores avanzados de búsqueda que permiten encontrar información que normalmente no aparece en búsquedas normales.
+Antes de escribir un solo comando, en un entorno profesional siempre se define el **scope**:
 
-### Operadores esenciales
+- Qué dominios están incluidos (por ejemplo: `empresa-ficticia.local`, `intranet.local`).
+- Qué rangos de IP puedes tocar (por ejemplo: `10.10.10.0/24`).
+- Qué partes están explícitamente fuera de alcance.
 
-| Operador | Uso | Ejemplo |
-|---|---|---|
-| `site:` | Limitar a un dominio | `site:empresa.com` |
-| `filetype:` | Tipo de archivo específico | `filetype:pdf confidencial` |
-| `inurl:` | Texto en la URL | `inurl:admin inurl:login` |
-| `intitle:` | Texto en el título | `intitle:"index of" passwords` |
-| `intext:` | Texto en el cuerpo | `intext:"password" filetype:txt` |
-| `""` | Frase exacta | `"John Smith" "empresa.com"` |
-| `-` | Excluir término | `site:empresa.com -www` |
+Trabajar **fuera del scope** es un error grave en un pentest real.
 
-### Dorks de práctica (uso en tus propios dominios únicamente)
-
-```bash
-# Archivos de configuración expuestos
-site:empresa.com filetype:env OR filetype:cfg OR filetype:config
-
-# Paneles de administración
-site:empresa.com inurl:admin OR inurl:dashboard OR inurl:panel
-
-# Documentos internos
-site:empresa.com filetype:pdf OR filetype:xlsx OR filetype:docx
-
-# Páginas de error con stack traces
-site:empresa.com "sql syntax" OR "mysql_fetch" OR "undefined index"
-
-# Subdominios menos conocidos
-site:*.empresa.com -www -mail
-```
+En nuestros labs, el scope estará claramente definido en el enunciado; tu tarea será respetarlo y documentarlo en tu informe de recon.
 
 ---
 
-## Metodología de un reconocimiento real
+## 4. Fases típicas de reconocimiento
 
-### Fase 1 — Perimetro externo (pasivo)
-```bash
-# 1. WHOIS básico
-whois dominio.com
+A nivel práctico, puedes pensar el reconocimiento en **cinco fases**. No siempre son lineales, pero ayudan a ordenar el trabajo.
 
-# 2. Registros DNS
-dig dominio.com ANY
-dig +short MX dominio.com
-dig +short NS dominio.com
+### 4.1 Definir scope y contexto
 
-# 3. Subdominios via certificados (sin enviar paquetes al target)
-curl -s "https://crt.sh/?q=%.dominio.com&output=json" | jq '.[].name_value' | sort -u
-```
+- Anotar dominios, subdominios conocidos, rangos de IP de laboratorio.
+- Entender, aunque sea de forma simple, **qué negocio simula el lab** (app web, intranet, servicio expuesto, etc.).
 
-### Fase 2 — Enumeración de infraestructura
-```bash
-# 4. theHarvester — emails, subdominios, IPs, empleados
-theharvester -d dominio.com -b google,bing,crtsh,linkedin -l 300 -f resultado-dominio
+### 4.2 Reconocimiento pasivo
 
-# 5. Búsqueda en Shodan (requiere cuenta gratuita)
-shodan search "org:\"Nombre Empresa\"" --fields ip_str,port,org,hostnames
+Ejemplos de tareas:
 
-# 6. Wayback Machine — URLs históricas
-waybackurls dominio.com | grep -E "\.php|\.asp|\.env" | sort -u
-```
+- Consultar WHOIS para ver información de registro de dominio.
+- Revisar registros DNS públicos (A, AAAA, MX, NS, TXT).
+- Ver si hay subdominios obvios (dev, test, staging) mencionados en certificados o registros.
 
-### Fase 3 — Reconocimiento de personas
-```bash
-# 7. Búsqueda de emails con patrón
-# En theHarvester los emails aparecen en el output
-# Validar formato con hunter.io (interfaz web)
+En esta fase, todavía puedes aprender mucho sin escanear nada.
 
-# 8. GitHub — buscar la organización
-# Buscar: org:nombre-empresa en GitHub
-# Revisar commits recientes buscando emails y posibles secretos
-```
+### 4.3 Descubrimiento de hosts
 
----
+Aquí empiezas a responder:
 
-## Conceptos clave
+- ¿Qué IPs dentro del rango están activas?
+- ¿Qué responde a ping? (cuando tiene sentido)
+- ¿Qué hosts responden a ciertos tipos de paquetes?
 
-**Reconocimiento pasivo vs. activo:**
-- **Pasivo:** No interactúas con el objetivo. Buscas en Google, Shodan, crt.sh. Cero riesgo legal. OSINT puro.
-- **Activo:** Envías paquetes al objetivo (ping, nmap, dirbusting). Empieza el pentest real. Requiere autorización.
+Herramientas típicas: Nmap en modo host discovery.
 
-**Superficie de ataque:**
-Todo lo que un atacante puede ver y potencialmente explotar: dominios, IPs, puertos, emails, tecnologías, empleados, credenciales filtradas.
+### 4.4 Enumeración de puertos y servicios
 
-**Huella digital:**
-La suma de toda la información pública sobre un objetivo. Tu trabajo en OSINT es mapear esa huella antes de que lo haga un atacante real.
+Una vez que sabes qué hosts están vivos, pasas a:
+
+- Identificar puertos abiertos (por ejemplo, 22, 80, 443, 445, etc.).
+- Obtener información básica del servicio: banners, versiones aparentes.
+
+Con esto puedes empezar a formar hipótesis:
+
+- "Este host parece un servidor web antiguo".
+- "Este otro expone SMB y puede tener recursos interesantes".
+
+### 4.5 Organización de hallazgos
+
+Todo lo anterior pierde valor si no lo organizas bien. Lo recomendable es:
+
+- Mantener una tabla por host: IP, puertos, servicios, notas.
+- Marcar posibles vectores a revisar más adelante (por ejemplo, `HTTP en 8080 con panel de login`).
+- Guardar comandos útiles en un archivo de notas.
+
+Este orden hará que el lab de mapeo de superficie sea más fácil de seguir y repetir.
 
 ---
 
-## ✅ Checklist de reconocimiento completo
+## 5. Ejemplo simple de flujo de trabajo
 
-```
-DOMINIO Y DNS
-  □ WHOIS (registrador, fechas, datos de contacto)
-  □ Registros A, MX, NS, TXT, SPF, DMARC
-  □ Subdominios via crt.sh
-  □ Subdominios via theHarvester
-  □ Rangos de IP / ASN
+Imagina que el lab te da este scope:
 
-INFRAESTRUCTURA
-  □ Tecnologías web (Wappalyzer)
-  □ Shodan/Censys (puertos, servicios, versiones)
-  □ Wayback Machine (endpoints históricos)
-  □ Google Dorks (archivos expuestos)
+- Dominio: `empresa-ficticia.local` (simulado en el lab).
+- Rango de red: `10.10.10.0/24`.
 
-PERSONAS
-  □ Empleados en LinkedIn
-  □ Patrón de emails corporativos
-  □ Emails en resultados de búsqueda
-  □ Revisión de GitHub de la organización
-  □ HaveIBeenPwned (cuentas en brechas)
+Un posible flujo sería:
 
-INFORMACIÓN FILTRADA
-  □ Pastebin / GitHub (credenciales, configs)
-  □ Documentos públicos con metadata
-  □ Código fuente expuesto accidentalmente
-```
+1. Anotar el scope en tu informe (`informe-recon-inicial.md`).
+2. Hacer una consulta WHOIS y algunas consultas DNS básicas.
+3. Ejecutar un host discovery sobre `10.10.10.0/24` para ver qué IPs responden.
+4. Para cada IP viva, hacer un escaneo de puertos limitado (por ejemplo, puertos más comunes).
+5. Crear una tabla con los hosts, puertos y servicios encontrados.
+6. Escribir un pequeño resumen de qué infraestructura parece existir en ese lab.
+
+Este tipo de flujo será la base del **Lab 01 — Mapeo de superficie básico**.
 
 ---
 
-**[← Volver al módulo](../README.md)** · **[→ Herramientas: theHarvester](../herramientas/theharvester.md)**
+## 6. Cómo usar este archivo en el módulo
+
+Antes de cada actividad o lab de recon, puedes:
+
+- Revisar rápidamente las definiciones de OSINT y recon técnico.
+- Recordar las cinco fases y en cuál estás trabajando.
+- Actualizar tus notas personales con ejemplos concretos.
+
+La idea es que este documento sea tu "hoja de referencia" para no perder la visión general mientras estás ejecutando comandos.
